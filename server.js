@@ -2,17 +2,17 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-
+const passport = require('passport');
+const {localStrategy, jwtStrategy} = require('./passport/strategies');
 const {PORT, CLIENT_ORIGIN} = require('./config');
 const {dbConnect} = require('./db-mongoose');
 
 const app = express();
 
-// app.use(express.json());
-
-
-//routers
+//required routers
+const authRouter = require('./routers/auth');
 const recipesRouter = require('./routers/recipes');
+const userRouter = require('./routers/user');
 
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
@@ -25,30 +25,17 @@ app.use(
     origin:CLIENT_ORIGIN
   })
 );
-// sanity check
-// app.get('/api/cheeses',(req,res) => {
-//   const cheese = [
-//     'Bath Blue',
-//     'Barkham Blue',
-//     'Buxton Blue',
-//     'Cheshire Blue',
-//     'Devon Blue',
-//     'Dorset Blue Vinney',
-//     'Dovedale',
-//     'Exmoor Blue',
-//     'Harbourne Blue',
-//     'Lanark Blue',
-//     'Lymeswold',
-//     'Oxford Blue',
-//     'Shropshire Blue',
-//     'Stichelton',
-//     'Stilton',
-//     'Blue Wensleydale',
-//     'Yorkshire Blue'
-//   ];
-//   res.json(cheese);
-// });
 
+app.use(express.json());
+app.use(morgan('common'));
+
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+//routers
+
+app.use('/v1',userRouter);
+app.use('/v1',authRouter);
 app.use('/v1', recipesRouter);
 
 app.use(function (req, res, next) {
