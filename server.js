@@ -36,6 +36,7 @@ passport.use(jwtStrategy);
 
 app.use('/v1',userRouter);
 app.use('/v1',authRouter);
+
 app.use('/v1', recipesRouter);
 
 app.use(function (req, res, next) {

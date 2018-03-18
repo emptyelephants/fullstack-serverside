@@ -16,22 +16,23 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 
 router.get('/recipes',jwtAuth,(req, res, next) => {
   console.log('what',req.user.id);
-  const userId = req.userId;
-  Recipe.find({userId})
+  const userId = req.user.id;
+  Recipe.find({author:userId})
     .then((recipes) => {
       res.json(recipes);
     })
     .catch(err => next(err));
 });
 
-router.post('/recipes',(req, res, next) => {
+router.post('/recipes',jwtAuth,(req, res, next) => {
   const {recipeName, brewMethod, steps} = req.body;
-  const userId = req.userId
+  const userId = req.user.id;
+  console.log('here',userId);
   const newRecipe = {
     recipeName,
     brewMethod,
     steps,
-    userId
+    author:userId
   };
   Recipe.create(newRecipe)
     .then((response) => {
