@@ -22,7 +22,7 @@ app.use(
 
 app.use(
   cors({
-    origin:CLIENT_ORIGIN
+    origin:'http://5aaee2617b6ee822539cbc78.condescending-leakey-bf7b6c.netlify.com'
   })
 );
 
