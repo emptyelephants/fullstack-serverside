@@ -4,10 +4,12 @@ mongoose.Promise = global.Promise;
 
 const recipeSchema = new mongoose.Schema ({
   recipeName:{ type: String, required: true },
-  brewMethod:{ type: String, required: true },
+  espressoType:{ type: String, required: true },
+  blurb:{ type:String },
   created:{ type: Date, default: Date.now },
-  author:{type:ObjectId,ref:'User', required:true},
-  steps:[{type:String}]
+  authorId:{ type:ObjectId,ref:'User', required:true },
+  steps:[ {type:String} ],
+  authorName:{ type:String, required:true}
 });
 
 

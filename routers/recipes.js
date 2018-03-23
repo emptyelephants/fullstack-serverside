@@ -12,12 +12,27 @@ mongoose.Promise = global.Promise;
 //
 
 // router.use(passport.authenticate('jwt', { session: false, failWithError: true }));
+router.get('/recipes/:id',(req,res,next) => {
+  const {id} = req.params;
+  Recipe.findOne({_id:id})
+    .select('steps recipeName espressoType blurb authorName')
+    .then((recipe) => {
+      res.json(recipe);
+    })
+    .catch(err =>next(err));
+});
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
 router.get('/recipes',jwtAuth,(req, res, next) => {
-  console.log('what',req.user.id);
   const userId = req.user.id;
-  Recipe.find({author:userId})
+  Recipe.find({authorId:userId})
+    .then((recipes) => {
+      res.json(recipes);
+    })
+    .catch(err => next(err));
+});
+router.get('/recipes/all',jwtAuth,(rq, res, next) => {
+  Recipe.find().limit(50)
     .then((recipes) => {
       res.json(recipes);
     })
@@ -25,14 +40,17 @@ router.get('/recipes',jwtAuth,(req, res, next) => {
 });
 
 router.post('/recipes',jwtAuth,(req, res, next) => {
-  const {recipeName, brewMethod, steps} = req.body;
+  const {recipeName, espressoType, steps, blurb} = req.body;
   const userId = req.user.id;
-  console.log('here',userId);
+  const authorName = req.user.username;
+  console.log(req.user);
   const newRecipe = {
     recipeName,
-    brewMethod,
+    espressoType,
     steps,
-    author:userId
+    blurb,
+    authorId:userId,
+    authorName:authorName
   };
   Recipe.create(newRecipe)
     .then((response) => {
@@ -45,15 +63,12 @@ router.post('/recipes',jwtAuth,(req, res, next) => {
     })
     .then((recipes) => res.json(recipes))
     .catch((err) => next(err));
-
-
 });
 
 // router.put() DO THIS
 
 router.delete('/recipes/:id',(req, res, next) => {
   const deleteId = req.params.id;
-
   Recipe.findByIdAndRemove(deleteId)
     .then((response) => {
       if(response){

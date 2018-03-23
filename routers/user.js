@@ -6,6 +6,8 @@ const router = express.Router();
 const jsonParser = bodyParser.json();
 
 const User = require ('../models/user.js');
+const Recipe = require('../models/recipe.js');
+
 router.post('/users',jsonParser,(req,res) => {
   //check for missing username or passowrd
   const requiredFields = ['username','password'];
@@ -106,6 +108,18 @@ router.post('/users',jsonParser,(req,res) => {
       });
     })
     .then((user) => {
+      console.log('what',user);
+      const userId =user._id;
+      const authorName = user.username;
+      const firstRecipe = {
+        recipeName:'Testpresso',
+        espressoType:'Example',
+        steps:['Brew Ratio: 31g in - 31g out','First Drop: 11s','Total Brew Time: 26 - 31 seconds'],
+        blurb:'This is just an example recipe, Feel free to delete it.',
+        authorId:userId,
+        authorName:authorName
+      };
+      Recipe.create(firstRecipe);
       return res.status(201).json(user.serialize());
     })
     .catch(err => {
