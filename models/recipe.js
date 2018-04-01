@@ -9,7 +9,7 @@ const recipeSchema = new mongoose.Schema ({
   created:{ type: Date, default: Date.now },
   authorId:{ type:ObjectId,ref:'User', required:true },
   steps:[ {type:String} ],
-  authorName:{ type:String, required:true}
+  authorName:{ type:String, required:true }
 });
 
 

@@ -1,17 +1,54 @@
 [
   {
-    "recipeName":"Monkey Bite Esspresso",
-    "brewMethod":"Semi-Automatic Espresso Machine",
-    "steps":["22g in - 22g out","25-35 seconds","7-10s on first drop"]
+    "recipeName" : "Espresso on Ice",
+    "espressoType" : "Iced Espresso ",
+    "steps" : [
+        "Pull an espresso shot, no specific way",
+        "Prep a glass filled halfway with Ice and Sparkling Water",
+        "Pour the espresso onto a spoon over the ice, letting the shot float over the sparkling water"
+    ],
+    "blurb" : "This is a perfect drink for a summer brunch or to compliment an afternoon snack.",
+    "authorId" :"555555555555555555550001",
+    "authorName" : "test",
+    "__v" : 0
   },
   {
-    "recipeName":"North Bird Esspresso",
-    "brewMethod":"Semi-Automatic Espresso Macine",
-    "steps":["11g in - 22g out","25-35 seconds","7-10s on first drop"]
+    "recipeName" : "Etheopia Gedeo",
+    "espressoType" : "Traditional Single Origin Espresso",
+    "steps" : [
+        "Grind size variable, aim for these parametrs",
+        "Volume Ratio: 22g in - 48g out",
+        "Total Time : 32-48 seconds",
+    ],
+    "blurb" : "A recipe for Bird Rock Coffee Roaster's new single origin coffee through my home espresso machine",
+    "authorId" :"555555555555555555550001",
+    "authorName" : "test",
+    "__v" : 0
   },
   {
-    "recipeName":"East Esspresso",
-    "brewMethod":"Semi-Automatic Espresso Macine",
-    "steps":["21g in - 21g out","25-35 seconds","10-13s on first drop"]
+    "recipeName" : "Test",
+    "espressoType" : "test ",
+    "steps" : [
+        "The First Step",
+        "The Second Step",
+        "The Third Step"
+    ],
+    "blurb" : "This is a test recipe with a few steps and other things can be written about it however these are the steps for it",
+    "authorId" :"555555555555555555550001",
+    "authorName" : "test",
+    "__v" : 0
+  },
+  {
+    "recipeName" : "Test",
+    "espressoType" : "test ",
+    "steps" : [
+        "The First Step",
+        "The Second Step",
+        "The Third Step"
+    ],
+    "blurb" : "This is a test recipe with a few steps and other things can be written about it however these are the steps for it",
+    "authorId" :"555555555555555555550001",
+    "authorName" : "test",
+    "__v" : 0
   }
 ]
